@@ -28,3 +28,6 @@ $("a.ydisk-example-1").ydisk();
 ```
 
 Автор: [Андрей Болдырев](https://andew.ru/ru/pages/page/person-andrew)
+
+## Changing log
+ * 1.0.1  matcher was changed

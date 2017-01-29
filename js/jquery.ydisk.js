@@ -1,18 +1,19 @@
-/*
- * Yandex Disk REST API jQuery Plugin
- * version: 1.0.0 (Feb. 2016)
+/*!
+ * Yandex Disk REST API jQuery Plugin for Public Yandex Disk URL
+ * version: 1.0.1 (April 2016)
  * requires jQuery v1.6 or later
  *
- * Examples at http: https://andew.ru/ru/pages/page/yandex-disk-rest-api-jquery-plugin
- * License: https://andew.ru/ru/pages/page/yandex-disk-rest-api-jquery-plugin
+ * Examples at https://andew.ru/ru/pages/page/yandex-disk-rest-api-jquery-plugin
+ * License: Free software.
+ * Copyright 2016 Andrey Boldyrev, andew.ru@gmail.com, Site andew.ru
  *
- * Copyright 2016 Andrey Boldyrev - andew.ru@gmail.com
+ * Yandex Disk REST API Doc - https://tech.yandex.ru/disk/rest/
  *
+ * Changing log
+ * 1.0.1  matcher was changed
  */
 ;(function(window, document, $) {
 
-    // jQuery on an empty object, we are going to use this as our Queue
-    // from ajaxQueue plugin //github.com/gnarf/jquery-ajaxQueue
     var ydiskQueue = $({}),
     ajaxQueue = function( ajaxOpts ) {
         
@@ -34,31 +35,30 @@
         return promise;
     };
 
-
+    // jQuery plugin initialization
     $.fn.ydisk = function(options) {
     
     	options = $.extend( true, {
     	   
                 onType        : 'click', //'click' or 'ready', default is click on element
         		url           : 'https://cloud-api.yandex.net:443/v1/disk/public/resources/download?public_key=',
-                matcher       : /(^.{0,15}yadi\.sk\/i\/[\w-]{13}$)/i,
+                matcher       : /(^.{0,15}yadi\.sk\/[\w]{1}\/[\w-]{13}$)/i, //  /(^.{0,15}yadi\.sk\/i\/[\w-]{13}$)/i  --was first
                 timeout       : 5000,
                 async         : true,  //bool
         		afterReplace  : false, //function witch will be called after ajax success action is done
-                loader        : false, //HTML code of loader, wich be appendTo selector
-                failed        : false,  //HTML code of loader, wich be appendTo selector
+                loader        : '&nbsp;<i class="fa fa-spinner fa-spin fa-fw"></i>', //HTML code of loader, which be appendTo selector
+                failed        : '&nbsp;<i title="Loading Error!" class="fa fa-info-circle fa-fw sm-red-font"></i>', //HTML code of fail icon, which be appendTo selector
                 replacer      : {
-                    audio : '<audio id="{id}" class="sm-ydisk-audio pure-img" controls src="{href}"{size}></audio>',
-                    video : '<video id="{id}" class="sm-ydisk-video pure-img" controls src="{href}"{size}></video>',
-                    image : '<img id="{id}" class="sm-ydisk-image pure-img" controls src="{href}"{size}>'
+                    audio : '<audio id="{id}" class="ydisk-audio pure-img" controls src="{href}"{size}></audio>',
+                    video : '<video id="{id}" class="ydisk-video pure-img" controls src="{href}"{size}></video>',
+                    image : '<img id="{id}" class="ydisk-image pure-img" controls src="{href}"{size}>'
                     }
                 },
                 options );
         
         $(this).on('onYdiskStart', function(e) {
         
-            //e - это jQ объект события eventObject, всегда передается в функцию обработчк!
-            var $this = $(this); //элемент на котором произошло событие
+            var $this = $(this);
             var url = $this.attr('href') || '';
             url = ( url.match(options.matcher) || [] )[1];
     
@@ -72,7 +72,6 @@
                 
                 if ( $.type(options.loader) === "string" ) {
                     $this.append( options.loader );
-                    // TODO: сделать удаление и вывод ошибки --может в бифолоад поместить!
                 }
                 
                 // run the actual $.ajax() by ajaxQueue()
@@ -90,7 +89,7 @@
                                 url = url.match(/media_type\=([^\&]+)/i);
                                 if (url) {
                                     return url[1] || 'error';
-                                }
+                                };
                                 return 'error';
                   		};
                       
@@ -110,8 +109,8 @@
                             var s = '',
                                 w = parseInt($this.data('width')),
                                 h = parseInt($this.data('height')),
-                                id = $this.attr('id') || 'sm-ydisk-replaced-' + new Date().getTime();
-                            //$.isNumeric  
+                                id = $this.attr('id') || 'ydisk-replaced-' + new Date().getTime();
+                            
                             if ( $.isNumeric(w) && $.isNumeric(h) ) {
                                 s = ' width="' + w + '" height="' + h + '"';
                             }
@@ -122,7 +121,7 @@
                             $this.replaceWith(replacer);
                             
                             
-                            // User's callback fterReplace(id, type) function
+                            // User's callback afterReplace(id, type) function
                             if ( $.type( options.afterReplace ) === 'function' ) {
                                 //Call the user's function
                                 try {
@@ -130,13 +129,16 @@
                                 } catch (e) {}
                             }
                             
-                            //Call the function with the same name as a given element id
+                            //Call the function with the same name as a given new element id
                             if ( typeof window[id] === 'function' ) {
+                                
                                 try {
                 					window[id]( id, type );
+                            
                 				} catch (e) {}
                             }
                         }
+                        
                     }, //End ajax success
                     error : function() {
                         //error(jqXHR, textStatus, errorThrown), jqXHR.status returns the status code as a number
@@ -166,10 +168,10 @@
                 e.preventDefault(); //<-- important!
                 $(this).trigger('onYdiskStart');
             });
-        }
+        };
 
         return this; //for chains calling
         
-    }; //End $.fn.ydisk
+    }; //End $.fn.ydisk plugin
 
-})(window, document, jQuery);
+})(window, document, jQuery); //End ydisk plugin
