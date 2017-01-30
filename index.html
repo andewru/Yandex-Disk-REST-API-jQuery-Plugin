@@ -44,14 +44,15 @@
 		<div class="blog-post">
 
 <p>Детальное описание устройства и принципа работы плагина с полным обзором его параметров&nbsp;и возможных вариантов подключения и использования представлено в статье <a href="https://andew.ru/ru/pages/page/yandex-disk-rest-api-jquery-plugin" target="_blank" title="Перейти к странице с деатльным описанием плагина и скринкастом на Andew.ru"><strong>Yandex Disk REST API jQuery Plugin<span class="fa fa-external-link fa-fw font-xsmall"></span></strong></a>. Здесь же содержится краткий мануал по практическому&nbsp;базовому применю плагина с готовыми блоками кода для вставки на сайт. Если вы не знакомы еще с плагином и технологией <strong>Yandex Disk REST API</strong>, то рекомендуется сначала ознакомиться с указанной выше статьей, что бы лучше понимать представленные здесь инструкции.</p>
-<p class="blog-post-meta" title="на страницу автора">Автор: <a href="https://andew.ru/ru/pages/page/person-andrew">Андрей Болдырев</a></p>
+<p class="blog-post-meta" title="на страницу автора">Автор: <a target="_blank" href="https://andew.ru/ru/pages/page/person-andrew">Андрей Болдырев</a></p>
 <hr><br><br>
+
 <h2 id="add-to-page">Подключение плагина к web странице</h2>
 <p>Подключение <strong>Yandex Disk REST API jQuery Plugin</strong> выполняется стандартно для всех <strong>jQuery</strong> плагинов.</p>
 <p>Для подключения плагина к web странице разместите, указанный ниже тег <strong><code>script</code></strong>, в теге <strong><code>head</code></strong> или перед закрывающим тегом <strong><code>&lt;/body&gt;</code></strong> вашей WEB страницы или выполнить динамическое подключение/загрузку плагина только на тех страницах, для которых он нужен (<a href="https://andew.ru/ru/pages/page/yandex-disk-rest-api-jquery-plugin#plugin-addto-page" target="_blank" title="к подробному описанию динамического подключения плагина на andew.ru"><em class="font-small">смотри примеры</em></a><span class="fa fa-external-link fa-fw font-xsmall"></span>).</p>
 <p><pre style="background:#fafafa;border-left:4px solid #0655a4;margin:0;padding:15px 10px;">
 <span class="sm-green-font">&lt;!-- Yandex Disk REST API jQuery Plugin --&gt;</span>
-&lt;script <span class="green-font">type</span>=&quot;<span class="sm-maroon-font">text/javascript</span>&quot; <span class="green-font">src</span>=&quot;<span class="sm-maroon-font">js/jquery.ydisk.js</span>&quot;&gt;&lt;/script&gt;</pre></p>
+&lt;script <span class="green-font">type</span>=&quot;<span class="sm-maroon-font">text/javascript</span>&quot; <span class="green-font">src</span>=&quot;<span class="sm-maroon-font">js/jquery.ydisk.min.js</span>&quot;&gt;&lt;/script&gt;</pre></p>
 <p>Библиотека <strong>jQuery</strong> должна быть подключена на web странице <u>перед</u> плагином.</p>
 <hr><br><br>
 <h2 id="basic-usage">Базовое применение плагина</h2>
@@ -83,6 +84,23 @@ $(&quot;<span class="red-font">a.ydisk-example-1</span>&quot;).<strong>ydisk</st
 <p><a class="ydisk-example-1" href="https://yadi.sk/i/FM8PMtzrpgYcp" target="_blank">Публичная ссылка1 на файла с Яндекс Диска</a></p>
 <p><a class="ydisk-example-1" href="https://yadi.sk/i/FM8PMtzrpgYcp" target="_blank">Публичная ссылка2 на файла с Яндекс Диска</a></p>
 <p>Все ссылки с указанным при применении плагина селектором будут обработаны.</p>
+<hr><br><br>
+
+<h2 id="download-usage">Download ссылка</h2>
+<p>Плагин предоставляет возможность из публичной ссылки на файл с Яндекс диска сформировать и вставить на web страницу прямую download ссылку на загрузку файла с Яндекс Диска в браузере. При клике по такой download ссылке начнется скачивание файла с Яндекс Диска через стандартный диалог загрузки браузера.</p>
+<p>Для файлов, <strong>не</strong> являющихся <code>audio</code>, <code>image</code> и <code>video</code> файлами, плагин самостоятельно и автоматически вставляет download ссылку на скачивание этих файлов.</p>
+<p>Если вам нужно, что бы плагин формировал download ссылку на скачивание и для файлов <code>audio</code>, <code>image</code> и <code>video</code>, то добавьте в исходную публичную ссылку на файл с Яндекс Диска атрибут <code>download="download"</code>. Примечание: атрибут должен иметь строго такой вид как представлено здесь.</p>
+
+<p>Для всех ссылок с этим атрибутом <code>download="download"</code> плагин будет выполнять замену исходной ссылки на download ссылку для скачивания, вне зависимости от типа файла. Что бы начать скачивание файла необходимо кликнуть по такой ссылке, т.к. загрузка не начинается самостоятельно.</p>
+<br>
+<p><strong>Пример кода ссылки с атрибутом <code>download="download"</code>:</strong></p>
+<pre style="background:#fafafa;border-left:4px solid #0655a4;margin:10px 0;padding:15px 10px;">
+&lt;a <span class="green-font">download</span>=&quot;<span class="sm-maroon-font">download</span>&quot; <span class="green-font">class</span>=&quot;<span class="sm-maroon-font">ydisk-onclick</span>&quot; <span class="green-font">href</span>=&quot;<span class="sm-maroon-font">https://yadi.sk/i/FM8PMtzrpgYcp</span>&quot; <span class="green-font">target</span>=&quot;<span class="sm-maroon-font">_blank</span>&quot;&gt;<u>Публичная</u> ссылка на файла с Яндекс Диска&lt;/a&gt;</pre>
+<br>
+<h3 id="download-demo">Demo download</h3>
+<p>Для демонстрации download примера кликните по приведенной ниже ссылке:</p>
+<p><a download="download" class="ydisk-onclick" href="https://yadi.sk/i/FM8PMtzrpgYcp" target="_blank">Публичная ссылка1 на файла с Яндекс Диска</a></p>
+<p><a download="download" class="ydisk-onclick" href="https://yadi.sk/i/FM8PMtzrpgYcp" target="_blank">Публичная ссылка2 на файла с Яндекс Диска</a></p>
 <hr><br><br>
 
 <h2 id="extended-usage">Расширенное применение плагина</h2>
@@ -119,7 +137,7 @@ $(<span class="blue-font">document</span>).ready(<span class="blue-font">functio
 	<li>передачу плагину в параметре <strong>afterReplace</strong> пользовательской <strong>callback</strong> функции, которая будет устанавливать обработчик <strong>click</strong> для интерактивного содержания видео;</li>
 	<li>вызов плагином дополнительной пользовательской функции с именем <strong>id</strong> ссылки.</li>
 </ul>
-<p>Подробное описание всех возможностей плагина смотри на странице <a href="https://andew.ru/ru/pages/page/yandex-disk-rest-api-jquery-plugin#plugin-usage-extended" title="перейти к описанию расширенных возможностей плагина на сайте andew.ru"><strong>Yandex Disk REST API jQuery Plugin</strong></a></p>
+<p>Подробное описание всех возможностей плагина смотри на странице <a target="_blank" href="https://andew.ru/ru/pages/page/yandex-disk-rest-api-jquery-plugin#plugin-usage-extended" title="перейти к описанию расширенных возможностей плагина на сайте andew.ru"><strong>Yandex Disk REST API jQuery Plugin</strong></a></p>
 <br>
 <h3 id="max-usage-1">Шаг 1 <span class="font-small">ссылка на файл с Яндекс Диска</span></h3>
 <p>Разместите на вашей <strong>web</strong> странице публичную ссылку(и) в теге <strong>&lt;a&gt;</strong> на файла с <strong>Яндекс Диска</strong> и добавьте к этой ссылке атрибут <strong>class</strong> со значением селектора, по которому вы будет применять плагин к этой ссылке. Добавьте к ссылке атрибут <strong>id</strong>. Плагин будет вызвать <strong>js</strong> функцию с <u>тем же именем</u>, что и значение атрибута <strong>id</strong> ссылки.</p>
@@ -232,10 +250,9 @@ $(document).ready(function() {
 </ul>
 <hr><br>
 
-<p>Приведенные выше примеры js кода по использованию плагина находятся в файле: <a href="js/jquery.ydisk-demo.js">js/jquery.ydisk-demo.js</a></p>
-
-		</div><!-- /.blog-post -->
-	</div><!-- /.blog-main -->
+<p>Приведенные выше примеры js кода по использованию плагина находятся в файле: <a target="_blank" href="js/jquery.ydisk-demo.js">js/jquery.ydisk-demo.js</a></p>
+</div><!-- /.blog-post -->
+</div><!-- /.blog-main -->
 
 
 <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
@@ -243,7 +260,7 @@ $(document).ready(function() {
 		<h4>About</h4>
 		<p>
 			<em>Yandex Disk REST API jQuery Plugin</em>
-			выполняет вставку и размещение на вашей web странице файлов аудио, видео, фото(image) с Яндекс Диска на основе публичной ссылки на этот файл.
+			выполняет вставку на web страницу файлов аудио, видео, фото или Download ссылку для файлов с Яндекс Диска на основе публичной ссылки на этот файл.
 		</p>
 	</div>
 	<div class="sidebar-module">
@@ -251,6 +268,7 @@ $(document).ready(function() {
 		<ol class="list-unstyled">
 			<li><a href="#add-to-page">Подключение к странице</a></li>
 			<li><a href="#basic-usage">Базовое применение</a></li>
+			<li><a href="#download-usage">Download применение</a></li>
 			<li><a href="#extended-usage">Расширенное применение</a></li>
 			<li><a href="#extended-usage-on-ready">On ready применение</a></li>
 			<li><a href="#max-usage">Продвинутое применение</a></li>
@@ -261,6 +279,7 @@ $(document).ready(function() {
 		<h4>Demo</h4>
 		<ol class="list-unstyled">
 			<li><a href="#ydisk-basic-example">Basic Demo</a></li>
+			<li><a href="#download-demo">Download Demo</a></li>
 			<li><a href="#extended-usage-on-ready-demo">On ready Demo</a></li>
 			<li><a href="#max-usage-demo">Max Demo</a></li>
 		</ol>
@@ -269,9 +288,9 @@ $(document).ready(function() {
 	<div class="sidebar-module">
 	<h4>Elsewhere</h4>
 		<ol class="list-unstyled">
-			<li><a href="https://andew.ru/ru/pages/page/yandex-disk-rest-api-jquery-plugin">Andew.ru</a></li>
-			<li><a href="https://github.com/andewru/Yandex-Disk-REST-API-jQuery-Plugin">GitHub</a></li>
-		<li><a href="https://youtu.be/kK0w0dkyG3I">YouTube</a></li>
+			<li><a target="_blank" href="https://andew.ru/ru/pages/page/yandex-disk-rest-api-jquery-plugin">Plugin Page</a></li>
+			<li><a target="_blank" href="https://github.com/andewru/Yandex-Disk-REST-API-jQuery-Plugin">GitHub</a></li>
+		<li><a target="_blank" href="https://youtu.be/kK0w0dkyG3I">YouTube</a></li>
 		</ol>
 	</div>
 
@@ -283,11 +302,11 @@ $(document).ready(function() {
 
 <footer class="blog-footer">
 	<p>
-		<a href="https://andew.ru/ru/pages/page/yandex-disk-rest-api-jquery-plugin">Yandex Disk REST API jQuery Plugin</a>
+		<a target="_blank" href="https://andew.ru/ru/pages/page/yandex-disk-rest-api-jquery-plugin">Yandex Disk REST API jQuery Plugin</a>
 		<br>
 		by
 		<br>
-		<a href="https://andew.ru/ru/pages/page/person-andrew">Andrey Boldyrev - Andew.ru</a>
+		<a target="_blank" href="https://andew.ru/ru/pages/page/person-andrew">Andrey Boldyrev - Andew.ru</a>
 	</p>
 <br>
 	<p><a href="#">Back to top</a></p>
@@ -296,14 +315,19 @@ $(document).ready(function() {
 
 
 	<!-- Bootstrap core JavaScript
-	================================================== -->
+	===================================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="/js/vendor/jquery.min.js"><\/script>')</script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-	<!-- Yandex Disk REST API jQuery Plugin -->
+	<!-- Yandex Disk REST API jQuery Plugin 
+	====================================================================== -->
 	<script type="text/javascript" src="js/jquery.ydisk.js"></script>
+
+	<!-- OR use minimized file
+	<script type="text/javascript" src="js/jquery.ydisk.min.js"></script>
+	====================================================================== -->
 
 	<script type="text/javascript" src="js/jquery.ydisk-demo.js"></script>
 

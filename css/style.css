@@ -260,7 +260,23 @@ h6, .h6 {
 	color:#FFF086 !important;
 }
 
-
+/* -- Scroll-top -- */
+.scroll-top {
+  cursor: pointer;
+  display: block;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 200;            
+}
+.scroll-top:hover {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -webkit-transition: opacity 1s;
+  transition: opacity 1s;                             
+}
 
 
 

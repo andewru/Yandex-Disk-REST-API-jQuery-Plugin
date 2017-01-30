@@ -25,8 +25,9 @@ function myVideo(id, type) {
 			onType:'ready',
 		});
 
-		//Example of user's callback function to make interactive video contents
+		//Example of user's afterReplace callback function to make interactive video contents
         var ydiskPlay = function(id, type) {
+                //var id is new element id attribute value, type stores file media tape and can be as audio,image,video
                 // to catch here the id and type as audio,image,video for inserted media object
                 // try to set handler to controls buttons to play media on start time
                 if ( type === 'audio' || type === 'video' ) {
@@ -79,8 +80,29 @@ function myVideo(id, type) {
             loader       : '&nbsp;<i class="fa fa-spinner fa-spin fa-fw"></i>',
             failed       : '&nbsp;<i title="Loading Error!" class="fa fa-info-circle fa-fw sm-red-font"></i>',
             afterReplace : ydiskPlay
-        });        
+        });
 
+
+
+
+		//scroll-top button for demo page
+        $('body').prepend('<div class="scroll-top"><i class="fa fa-hand-o-up fa-2x fa-fw gray-font"></i></div>');
+        var scrollButtonEl = $('.scroll-top');
+        scrollButtonEl.hide();
+        $(window).scroll(function() {
+                if ( $(window).scrollTop() < 20 ) {
+                        $('.scroll-top').fadeOut();
+                } else {
+                        $('.scroll-top').fadeIn();
+                };
+        });
+        scrollButtonEl.click(function() {
+                $("html, body").animate({
+                        scrollTop: 0
+                }, 300);
+                return false;
+        });//End scroll-top
+		
     }); //End ready function
 
 }(window, document, jQuery));
