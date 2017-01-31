@@ -2,7 +2,7 @@
 
 Yandex Disk REST API jQuery Plugin выполняет вставку и размещение на web странице объектов аудио, видео, фото или Download ссылки для файлов с Яндекс Диска на основе публичной ссылки на файл.
 
-В файле index.html представлены инструкция и demo примеры. Детальное описание устройства и принципа работы плагина с полным обзором его параметров и возможных вариантов подключения и использования представлено в статье [Yandex Disk REST API jQuery Plugin](https://andew.ru/ru/pages/page/yandex-disk-rest-api-jquery-plugin).
+В файле index.html представлены инструкция и demo примеры. Детальное описание устройства и принципа работы плагина с полным обзором его параметров и возможных вариантов подключения и использования представлено в статье [Yandex Disk REST API jQuery Plugin](https://andew.ru/ru/pages/page/yandex-disk-rest-api-jquery-plugin) и [Применение Yandex Disk REST API jQuery Plugin](https://andew.ru/ru/pages/page/yandex-disk-rest-api-jquery-plugin-usage)
 
 
 
@@ -33,11 +33,11 @@ $("a.ydisk-example-1").ydisk();
 ## Changing log
 
 ### 1.0.2
-	* Download link functionality was added
-	* matcher was changed 
+* Download link functionality was added
+* matcher was changed 
 
 ### 1.0.1
-	* matcher was changed
+* matcher was changed
 
 
 Автор: [Андрей Болдырев](https://andew.ru/ru/pages/page/person-andrew)
