@@ -1,4 +1,6 @@
-# Yandex-Disk-REST-API-jQuery-Plugin
+# Yandex-Disk-REST-API-jQuery-Plugin АРХИВ
+
+**ПЛАГИН УСТАРЕЛ, НЕ ИСПОЛЬЗОВАТЬ**
 
 Yandex Disk REST API jQuery Plugin выполняет вставку и размещение на web странице объектов аудио, видео, фото или Download ссылки для файлов с Яндекс Диска на основе публичной ссылки на файл.
 
